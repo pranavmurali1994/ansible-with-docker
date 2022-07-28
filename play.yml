@@ -1,0 +1,14 @@
+- name: initialise docker swarm 
+  hosts: alma
+  roles:
+          - swarm-init 
+
+- name: Add wrker nodes
+  hosts: all
+  roles:
+          - add-worker 
+- name: swarm service
+  hosts: alma
+  roles:
+          - swarm-service
+  tags: deploy 

@@ -1,0 +1,23 @@
+---
+# tasks file for swarm-init
+- name: Get info on Docker Swarm
+  docker_swarm_info:
+  ignore_errors: yes
+  register: swarm_info
+
+- name: Init a new swarm with default parameters
+  docker_swarm:
+          state: present
+          advertise_addr: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+  when: swarm_info != 0
+  run_once: true
+
+- name: Get info on Docker Swarm and filtered list of registered nodes
+  community.general.docker_swarm_info:
+    nodes: yes
+    nodes_filters:
+      name: mynode
+  register: result
+
+- ansible.builtin.debug:
+    var: result.swarm_facts.JoinTokens.Manager

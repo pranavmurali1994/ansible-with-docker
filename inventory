@@ -1,0 +1,12 @@
+[inv]
+alma-1
+alma-2
+alma
+
+[manager]
+alma 
+
+[worker]
+alma-1 
+alma-2 
+

@@ -1,0 +1,13 @@
+---
+# tasks file for add-worker
+
+- name: Add nodes
+  docker_swarm:
+    state: join
+    advertise_addr: "{{ hostvars['alma']['ansible_enp0s8']['ipv4']['address'] }}"
+    join_token: "{{ hostvars['alma']['result']['swarm_facts']['JoinTokens']['Worker'] }}"
+    remote_addrs: "{{ hostvars['alma']['ansible_enp0s8']['ipv4']['address'] }}:2377" 
+  when: inventory_hostname in groups['worker'] 
+
+
+
