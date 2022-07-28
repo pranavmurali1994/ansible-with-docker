@@ -1,3 +1,9 @@
+- name: install docker
+  hosts: alma-2
+  roles:
+          - install-docker
+  tags: install
+
 - name: initialise docker swarm 
   hosts: alma
   roles:
