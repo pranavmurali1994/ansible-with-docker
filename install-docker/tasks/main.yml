@@ -1,0 +1,30 @@
+---
+# tasks file for install-docker
+- name: Get info on docker host
+  docker_host_info:
+  ignore_errors: yes
+  register: result1
+
+- name: Debug
+  debug:
+    msg: "{{ result1['host_info']['ServerVersion'] }}"
+  ignore_errors: yes
+
+- name: Remove old versions docker
+  dnf:
+    name: "{{item}}"
+    state: absent
+    autoremove: yes
+  loop: "{{old_packages}}"
+  when: result1['host_info']['ServerVersion'] != "{{ required_package_v }}"
+  ignore_errors: yes
+  tags: rm_old
+
+- name: Install docker 
+  dnf:
+          name: "{{item}}"
+          state: present
+  with_items: "{{new_packeges}}"
+  notify: Start docker
+  tags: skp
+

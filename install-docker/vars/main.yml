@@ -1,0 +1,18 @@
+---
+# vars file for install-docker
+old_packages:
+        - docker-ce
+        - docker-ce-*
+        - docker-ce-cli
+        - docker-ce-cli-*
+        - containerd.io
+        - docker-compose-plugin
+required_package_v: "19.03.15"
+new_packeges:
+        - docker-ce-19.03.15
+        - docker-ce-cli-19.03.15
+        - containerd.io
+        - docker-compose-plugin
+        - nginx
+
+
