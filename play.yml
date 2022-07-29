@@ -1,5 +1,5 @@
 - name: install docker
-  hosts: alma-2
+  hosts: all
   roles:
           - install-docker
   tags: install
